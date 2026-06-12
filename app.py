@@ -3,7 +3,18 @@ import pandas as pd
 import numpy as np
 import plotly.graph_objects as go
 import os
+import subprocess
 
+# Path to backtest results
+backtest_path = "/STOCK-MARKET-NEWS-PREDICTION/data/processed/backtest_results.csv"
+
+# Auto-run backtest if file is missing
+if not os.path.exists(backtest_path):
+    try:
+        subprocess.run(["python", "src/backtest.py"], check=True)
+        print("Backtest completed, results file created.")
+    except Exception as e:
+        print(f"Failed to run backtest.py automatically: {e}")
 
 # 1. PAGE CONFIGURATION
 
